@@ -1,5 +1,5 @@
 from flask import Flask , render_template , request, redirect
-from anime_predictor import anime_pred ,genere , rating , checker
+from anime_predictor import anime_pred ,genere , rating , checker ,list_gene,list_name,list_rating
 app = Flask(__name__)
 
 
@@ -26,6 +26,15 @@ def anime():
 
     ll = []      
     return render_template("anime.html" , ll = ll)
+
+
+@app.route("/list")
+def list():
+    name = list_name()
+    gen = list_gene()
+    rat = list_rating()
+
+    return render_template("list.html" , name=name , gen = gen, rat = rat)
 
 
 if __name__ == "__main__":

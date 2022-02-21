@@ -42,3 +42,13 @@ def checker(name):
         return ["hi","hi","hi", "hi","hi"]
     else:
         return ["hi","hi"]
+
+
+def list_name():
+    return data.name
+
+def list_gene():
+    return data.genre
+
+def list_rating():
+    return data.rating
