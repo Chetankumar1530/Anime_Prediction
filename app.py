@@ -1,5 +1,5 @@
 from flask import Flask , render_template , request, redirect
-from anime_predictor import anime_pred ,genere , rating , checker ,list_gene,list_name,list_rating
+from anime_predictor import anime_hunt ,genere , rating , checker ,list_gene,list_name,list_rating
 app = Flask(__name__)
 
 
@@ -15,7 +15,7 @@ def anime():
         if len(checker(a)) > 4:
                 
             
-            b = anime_pred(a,10)
+            b = anime_hunt(a,10)
             gg = genere(a,10)
             rr = rating(a,10)
             return render_template("anime.html" , ll = b  , gg = gg , rr = rr)

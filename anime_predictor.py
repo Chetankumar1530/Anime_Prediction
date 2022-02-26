@@ -7,33 +7,62 @@ data.genre.fillna(" ",inplace=True)
 
 tfid = TfidfVectorizer(stop_words="english")
 vector = tfid.fit_transform(data.genre)
-dis = linear_kernel(vector,vector)
 index =pd.Series(data = data.index, index=data.name)
-def anime_pred(name,n):   
+
+
+def anime_hunt(name,n =10):
+
     ind_name = index[name]
-    val_name = list(enumerate(dis[ind_name]))
-    val_name =sorted(val_name,key=lambda x : x[1] ,reverse=True)
-    l = []
-    for i in range (0,n):
-        l.append(data.name.loc[val_name[i][0]])
+    dis = linear_kernel(vector[ind_name],vector)
+    val_name = list((dis))
+    d = pd.DataFrame(val_name )
+    
+    d = d.transpose()
+    d.columns = ["name"]
+    d = d.sort_values(by="name" ,ascending=False)
+    l=[]
+
+    for i in range (0,10):
+        l.append(data.name.loc[d.index[i]])
     return l
+
+# def anime_pred(name,n):   
+#     ind_name = index[name]
+#     val_name = list(enumerate(dis[ind_name]))
+#     val_name =sorted(val_name,key=lambda x : x[1] ,reverse=True)
+#     l = []
+#     for i in range (0,n):
+#         l.append(data.name.loc[val_name[i][0]])
+#     return l
 
 def genere(name,n):   
     ind_name = index[name]
-    val_name = list(enumerate(dis[ind_name]))
-    val_name =sorted(val_name,key=lambda x : x[1] ,reverse=True)
-    l = []
-    for i in range (0,n):
-        l.append(data.genre.loc[val_name[i][0]])
+    dis = linear_kernel(vector[ind_name],vector)
+    val_name = list((dis))
+    d = pd.DataFrame(val_name )
+    
+    d = d.transpose()
+    d.columns = ["name"]
+    d = d.sort_values(by="name" ,ascending=False)
+    l=[]
+
+    for i in range (0,10):
+        l.append(data.genre.loc[d.index[i]])
     return l
 
 def rating(name,n):   
     ind_name = index[name]
-    val_name = list(enumerate(dis[ind_name]))
-    val_name =sorted(val_name,key=lambda x : x[1] ,reverse=True)
-    l = []
-    for i in range (0,n):
-        l.append(data.rating.loc[val_name[i][0]])
+    dis = linear_kernel(vector[ind_name],vector)
+    val_name = list((dis))
+    d = pd.DataFrame(val_name )
+    
+    d = d.transpose()
+    d.columns = ["name"]
+    d = d.sort_values(by="name" ,ascending=False)
+    l=[]
+
+    for i in range (0,10):
+        l.append(data.rating.loc[d.index[i]])
     return l
 
 
